@@ -1,5 +1,11 @@
+<style>
+  * {
+ font-family: Tahoma;
+}
+</style>
+
 <div align="center">
-  <h1> <%= @game.player_1.name %> vs. <%= @game.player_2.name %> </h1>
+  <h1 style="font-family: Tahoma;"> <%= @game.player_1.name.upcase %> vs. <%= @game.player_2.name.upcase %> </h1>
 </div>
 <div align="right">
   <h2> <%= @game.player_2.name %>: <%= @game.player_2.hit_points %>HP </h2>
