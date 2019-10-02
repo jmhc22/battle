@@ -19,6 +19,11 @@ class Battle < Sinatra::Base
     erb :attack
   end
 
+  get '/rand-attack' do
+    Attack.new.lucky_strike(@game.defending_player)
+    erb :attack
+  end
+
   post '/names' do
     player_1 = Player.new(params[:player_1_name])
     player_2 = Player.new(params[:player_2_name])

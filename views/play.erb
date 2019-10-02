@@ -16,6 +16,9 @@
 <div align="center">
   <h1> <%= @game.current_turn.name %>'s turn </h1>
   <form action="/attack">
-    <input type="submit" value="Attack">
+    <input type="submit" value="Tackle">
+  </form>
+  <form action="/rand-attack">
+    <input type="submit" value="Lucky Strike">
   </form>
 </div>
