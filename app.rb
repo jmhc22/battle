@@ -24,8 +24,17 @@ class Battle < Sinatra::Base
   end
 
   post '/switch-turns' do
-    $game.switch_turns
-    redirect '/play'
+    if $game.defending_player.hit_points <= 0
+      redirect '/lose'
+    else
+      $game.switch_turns
+      redirect '/play'
+    end
+  end
+
+  get '/lose' do
+    @game = $game
+    erb :lose
   end
 
   get '/play' do
