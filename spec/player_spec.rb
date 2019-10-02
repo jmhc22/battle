@@ -2,31 +2,24 @@ require 'player'
 
 describe Player do
 
-    subject(:sid) { Player.new('Sid') }
-    subject(:james) { Player.new('James') }
+    subject(:player_1) { Player.new('player_1') }
+    subject(:player_2) { Player.new('player_2') }
 
   describe "#name}" do
     it "returns name" do
-      expect(sid.name).to eq 'Sid'
+      expect(player_1.name).to eq 'player_1'
     end
   end
 
   describe "#hit_points" do
     it "returns hit points" do
-      expect(sid.hit_points).to eq described_class::DEFAULT_HIT_POINTS
-    end
-  end
-
-  describe "#attack" do
-    it "damages the player" do
-      expect(james).to receive(:receive_damage)
-      sid.attack(james)
+      expect(player_1.hit_points).to eq described_class::DEFAULT_HIT_POINTS
     end
   end
 
   describe "#receive_damage" do
     it "reduces the players hit points" do
-      expect {sid.receive_damage }.to change {sid.hit_points }.by(-10)
+      expect {player_1.receive_damage }.to change {player_1.hit_points }.by(-10)
     end
   end
 end
