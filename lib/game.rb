@@ -8,10 +8,6 @@ class Game
     @current_turn = player_1
   end
 
-  def attack(player)
-    player.receive_damage
-  end
-
   def defending_player
     @players.last
   end
