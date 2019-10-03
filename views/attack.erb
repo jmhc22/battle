@@ -1,17 +1,9 @@
 <style>
-  * {
- font-family: Tahoma;
-}
+  * { font-family: Tahoma; }
 </style>
 <div align="center">
-<% if @game.current_turn == @game.player_1 %>
-<h1> <%= @game.player_1.name %> attacks <%= @game.player_2.name %> </h1>
-<% else %>
-<h1> <%= @game.player_2.name %> attacks <%= @game.player_1.name %> </h1>
-<% end %>
-
+<h1> <%= @game.current_turn.name %> attacks <%= @game.defending_player.name %> </h1>
 <h2> Used <%= @type %> and dealt <%= @game.defending_player.last_damamge %>HPs damage! </h2>
-
 <form action="/switch-turns" method="post">
   <input type="submit" value="OK">
 </form>

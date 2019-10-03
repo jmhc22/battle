@@ -1,14 +1,13 @@
-class Player
-  attr_reader :name, :hit_points, :last_damamge
-  DEFAULT_HIT_POINTS = 100
+require_relative 'battle_mechanics'
 
-  def initialize(name, hit_points = DEFAULT_HIT_POINTS)
+class Player
+  attr_reader :name, :hit_points, :last_damamge, :status
+  DEFAULT_HIT_POINTS = 100
+  include BattleMechanics
+
+  def initialize(name, status = Status, hit_points = DEFAULT_HIT_POINTS)
     @name = name
     @hit_points = hit_points
-  end
-
-  def receive_damage(amount)
-    @hit_points -= amount
-    @last_damamge = amount
+    @status = status.new
   end
 end

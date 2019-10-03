@@ -1,15 +1,14 @@
+require_relative 'battle_mechanics'
+
 class Computer
   attr_reader :name, :hit_points, :last_damamge
+  include BattleMechanics
 
-  def initialize(attack_class: Attack)
+  def initialize(attack_class: Attack, status: Status)
     @name = "Computer"
     @hit_points = 100
     @attack_class = attack_class
-  end
-
-  def receive_damage(amount)
-    @hit_points -= amount
-    @last_damamge = amount
+    @status = status.new
   end
 
   def move(player)

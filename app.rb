@@ -3,6 +3,7 @@ require './lib/player'
 require './lib/game'
 require './lib/attack'
 require './lib/computer'
+require './lib/status'
 
 class Battle < Sinatra::Base
   enable :sessions
