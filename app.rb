@@ -15,27 +15,19 @@ class Battle < Sinatra::Base
     erb :index
   end
 
-
-
   get '/single' do
     erb :single
   end
 
-
-
+  post '/name' do
+    player_1 = Player.new(params[:player_1_name])
+    player_2 = Computer.new
+    @game = Game.create(player_1, player_2)
+    redirect '/play'
+  end
 
   get '/multi' do
     erb :multi
-  end
-
-  get '/attack' do
-    Attack.new.tackle(@game.defending_player)
-    erb :attack
-  end
-
-  get '/rand-attack' do
-    Attack.new.lucky_strike(@game.defending_player)
-    erb :attack
   end
 
   post '/names' do
@@ -43,6 +35,26 @@ class Battle < Sinatra::Base
     player_2 = Player.new(params[:player_2_name])
     @game = Game.create(player_1, player_2)
     redirect '/play'
+  end
+
+  post '/comp-attack' do
+    if @game.current_turn.move(@game.defending_player) == "tackle"
+      redirect '/attack'
+    else
+      redirect '/rand-attack'
+    end
+  end
+
+  get '/attack' do
+    Attack.new.tackle(@game.defending_player) if @game.current_turn.is_a? Player
+    @type = "Tackle"
+    erb :attack
+  end
+
+  get '/rand-attack' do
+    Attack.new.lucky_strike(@game.defending_player) if @game.current_turn.is_a? Player
+    @type = "Lucky Strike"
+    erb :attack
   end
 
   post '/switch-turns' do

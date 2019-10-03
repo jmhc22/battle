@@ -13,12 +13,21 @@
 <div align="left">
   <h2> <%= @game.player_1.name %>: <%= @game.player_1.hit_points %>HP </h2>
 </div>
-<div align="center">
-  <h1> <%= @game.current_turn.name %>'s turn </h1>
-  <form action="/attack">
-    <input type="submit" value="Tackle">
-  </form>
-  <form action="/rand-attack">
-    <input type="submit" value="Lucky Strike">
-  </form>
-</div>
+<h1 align="center"> <%= @game.current_turn.name %>'s turn: </h1>
+
+<% if @game.current_turn.is_a? Computer %>
+  <div align="center">
+    <form action="/comp-attack" method="post">
+      <input type="submit" value="OK">
+    </form>
+  </div>
+<% else %>
+  <div align="center">
+    <form action="/attack">
+      <input type="submit" value="Tackle">
+    </form>
+    <form action="/rand-attack">
+      <input type="submit" value="Lucky Strike">
+    </form>
+  </div>
+<% end %>
