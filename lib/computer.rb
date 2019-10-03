@@ -1,9 +1,10 @@
 class Computer
   attr_reader :name, :hit_points, :last_damamge
 
-  def initialize
+  def initialize(attack_class: Attack)
     @name = "Computer"
     @hit_points = 100
+    @attack_class = attack_class
   end
 
   def receive_damage(amount)
@@ -23,12 +24,12 @@ class Computer
   end
 
   def lucky_strike(player)
-    Attack.new.lucky_strike(player)
+    @attack_class.new.lucky_strike(player)
     "lucky strike"
   end
 
   def tackle(player)
-    Attack.new.tackle(player)
+    @attack_class.new.tackle(player)
     "tackle"
   end
 
