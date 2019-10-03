@@ -1,5 +1,5 @@
 class Game
-  attr_reader :current_turn, :player_1, :player_2
+  attr_reader :player_1, :player_2
 
   def self.instance
     @game
@@ -27,5 +27,5 @@ class Game
     @players.reverse!
     @current_turn = @players.first
   end
-
 end
+ 

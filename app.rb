@@ -47,21 +47,34 @@ class Battle < Sinatra::Base
   end
 
   get '/attack' do
-    Attack.new.tackle(@game.defending_player) if @game.current_turn.is_a? Player
+    Attack.new.tackle(@game.defending_player)
     @type = "Tackle"
     erb :attack
   end
 
   get '/rand-attack' do
-    Attack.new.lucky_strike(@game.defending_player) if @game.current_turn.is_a? Player
+    Attack.new.lucky_strike(@game.defending_player)
     @type = "Lucky Strike"
     erb :attack
   end
 
-  post '/switch-turns' do
+  get '/poison-sting' do
+    Attack.new.poison_sting(@game.defending_player)
+    @type = "Poison Sting"
+    erb :attack
+  end
+
+  post '/poison-check' do
+    redirect '/switch-turns' unless @game.defending_player.status.poisoned?
+    @game.defending_player.poison_damage
+    erb :poison
+  end
+
+  get '/switch-turns' do
     if @game.defending_player.hit_points <= 0
       redirect '/lose'
     else
+      @game.current_turn.status.status_recover
       @game.switch_turns
       redirect '/play'
     end

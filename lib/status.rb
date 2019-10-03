@@ -13,15 +13,15 @@ class Status
   end
 
   def asleep?
-    false if @asleep <= 0
+    @asleep > 0
   end
 
   def paralysed?
-    false if @paralyse <= 0
+    @paralyse > 0
   end
 
   def poisoned?
-    false if @poison <= 0
+    @poison > 0
   end
 
   def sleeps
@@ -29,7 +29,7 @@ class Status
   end
 
   def poisoned
-    @poison = rand(3..5)
+    @poison = rand(2..4)
   end
 
   def paralysed

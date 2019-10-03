@@ -5,13 +5,13 @@ module BattleMechanics
   end
 
   def poison_damage
-    @hit_points -= poison_calculator
+    receive_damage(poison_calculator)
   end
 
   private
 
   def poison_calculator
-    [5, 5, 5, 10, 15].sample
+    [5, 5, 5, 10].sample
   end
 
 end
