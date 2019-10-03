@@ -6,5 +6,4 @@ feature 'Enter names' do
     click_button 'Submit'
     expect(page).to have_content 'JAMES vs. SID'
   end
-
 end

@@ -3,18 +3,12 @@
  font-family: Tahoma;
 }
 </style>
-<center>
-  <h1>Time to Battle!</h1>
-  <h2>Sign in to play</h2>
-  <form action="/names" method="post">
-    <label for="player_1_name">
-      Player 1 name
-      <input type="text" name="player_1_name">
-    </label>
-    <label for="player_2_name">
-      Player 2 name
-      <input type="text" name="player_2_name">
-    </label>
-    <input type="submit" value="Submit">
+<div align="center">
+  <h2> Who's Playing? </h2>
+  <form action="/single">
+    <input type="submit" value="Single Player">
   </form>
-</center>
+  <form action="/multi">
+    <input type="submit" value="Multi Player">
+  </form>
+</div>

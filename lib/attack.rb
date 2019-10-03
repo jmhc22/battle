@@ -1,6 +1,6 @@
 class Attack
 
-  def run(player)
+  def tackle(player)
     player.receive_damage(15)
   end
 

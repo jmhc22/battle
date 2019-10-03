@@ -2,6 +2,7 @@ require 'sinatra/base'
 require './lib/player'
 require './lib/game'
 require './lib/attack'
+require './lib/computer'
 
 class Battle < Sinatra::Base
   enable :sessions
@@ -14,8 +15,21 @@ class Battle < Sinatra::Base
     erb :index
   end
 
+
+
+  get '/single' do
+    erb :single
+  end
+
+
+
+
+  get '/multi' do
+    erb :multi
+  end
+
   get '/attack' do
-    Attack.new.run(@game.defending_player)
+    Attack.new.tackle(@game.defending_player)
     erb :attack
   end
 
