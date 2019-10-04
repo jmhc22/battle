@@ -52,36 +52,45 @@ class Battle < Sinatra::Base
   end
 
   get '/tackle' do
-    Attack.new.tackle(@game.defending_player)
     @type = "Tackle"
+    Attack.new.tackle(@game.defending_player)
     erb :attack
   end
 
   get '/lucky-strike' do
-    Attack.new.lucky_strike(@game.defending_player)
     @type = "Lucky Strike"
+    Attack.new.lucky_strike(@game.defending_player)
     erb :attack
   end
 
   get '/poison-sting' do
+    @type = "Poison Sting"
     redirect '/miss' if rand(1..10) == 10
     Attack.new.poison_sting(@game.defending_player)
-    @type = "Poison Sting"
     erb :attack
   end
 
   get '/thunder-wave' do
-    redirect '/miss' if rand(1..10) >= 9
-    Attack.new.thunder_wave(@game.defending_player)
     @type = "Thunder Wave"
+    redirect '/miss' if rand(1..10) >= 8
+    Attack.new.thunder_wave(@game.defending_player)
     erb :attack
   end
 
   get '/hypnosis' do
-    redirect '/miss' if rand(1..10) >= 8
-    Attack.new.hypnosis(@game.defending_player)
     @type = "Hypnosis"
+    redirect '/miss' if rand(1..10) >= 7
+    Attack.new.hypnosis(@game.defending_player)
     erb :attack
+  end
+
+  get '/recover' do
+    if @game.current_turn.hit_points > 100
+      @hp_high = true
+    else
+      Attack.new.recover(@game.current_turn)
+    end
+    erb :recover
   end
 
   get '/miss' do

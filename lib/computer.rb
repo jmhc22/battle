@@ -1,7 +1,7 @@
 require_relative 'battle_mechanics'
 
 class Computer
-  attr_reader :name, :hit_points, :last_damamge, :status
+  attr_reader :name, :hit_points, :last_damage, :status
   include BattleMechanics
 
   def initialize(status: Status)
@@ -19,17 +19,17 @@ class Computer
   private
 
   def early_game
-    ["poison-sting", "poison-sting", "lucky-strike", "lucky-strike", "lucky-strike",
+    ["poison-sting", "poison-sting", "lucky-strike", "lucky-strike",
      "thunder-wave", "thunder-wave", "tackle", "hypnosis" ].sample
   end
 
   def mid_game
     ["hypnosis", "hypnosis", "lucky-strike", "lucky-strike", "tackle",
-     "tackle", "thunder-wave"].sample
+     "tackle", "thunder-wave", "recover"].sample
   end
 
   def end_game
-    ["tackle", "tackle", "tackle", "lucky-strike", "hypnosis"].sample
+    ["tackle", "tackle", "lucky-strike", "hypnosis", "recover", "recover"].sample
   end
 
 end

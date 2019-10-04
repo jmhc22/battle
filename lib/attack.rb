@@ -23,6 +23,10 @@ class Attack
     player.status.sleeps unless player.status.asleep?
   end
 
+  def recover(player)
+    player.receive_damage([-5, -10, -20, -30, -35].sample)
+  end
+
   private
 
   def lucky_caclulator

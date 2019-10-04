@@ -25,7 +25,5 @@ class Game
 
   def switch_turns
     @players.reverse!
-    @current_turn = @players.first
   end
 end
- 
