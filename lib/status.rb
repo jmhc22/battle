@@ -25,15 +25,15 @@ class Status
   end
 
   def sleeps
-    @asleep = [2, 2, 3, 3, 4].sample
+    @asleep = [2, 2, 3 ,3, 3, 4].sample
   end
 
   def poisoned
-    @poison = rand(3..5)
+    @poison = rand(3..6)
   end
 
   def paralysed
-    @paralyse = rand(3..4)
+    @paralyse = [4, 4, 5].sample
   end
 
 end

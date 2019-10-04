@@ -42,7 +42,7 @@ class Battle < Sinatra::Base
     if @game.current_turn.status.asleep?
       @status = "asleep"
       erb :status
-    elsif @game.current_turn.status.paralysed? && rand(2) == 1
+    elsif @game.current_turn.status.paralysed? && rand(3) == 2
       @status = "paralysed"
       erb :status
     else
@@ -72,14 +72,14 @@ class Battle < Sinatra::Base
 
   get '/thunder-wave' do
     @type = "Thunder Wave"
-    redirect '/miss' if rand(1..10) >= 8
+    redirect '/miss' if rand(1..10) >= 9
     Attack.new.thunder_wave(@game.defending_player)
     erb :attack
   end
 
   get '/hypnosis' do
     @type = "Hypnosis"
-    redirect '/miss' if rand(1..10) >= 7
+    redirect '/miss' if rand(1..10) >= 8
     Attack.new.hypnosis(@game.defending_player)
     erb :attack
   end

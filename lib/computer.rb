@@ -11,6 +11,7 @@ class Computer
   end
 
   def move(player)
+    return "recover" if @hit_points <= 35 && rand(3) !=2
     return early_game if player.hit_points >= 100
     return mid_game if player.hit_points >= 50
     end_game
@@ -29,7 +30,8 @@ class Computer
   end
 
   def end_game
-    ["tackle", "tackle", "lucky-strike", "hypnosis", "recover", "recover"].sample
+    ["tackle", "tackle", "lucky-strike", "hypnosis", "recover",
+     "recover", "poison-sting"].sample
   end
 
 end
