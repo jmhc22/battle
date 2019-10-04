@@ -1,9 +1,9 @@
 <style>
-  * { font-family: Tahoma; }
+  * { font-family: Courier New; }
 </style>
 
 <div align="center">
-  <h1 style="font-family: Tahoma;"> <%= @game.player_1.name.upcase %> vs. <%= @game.player_2.name.upcase %> </h1>
+  <h1 style="font-family: Courier New;"> <%= @game.player_1.name.upcase %> vs. <%= @game.player_2.name.upcase %> </h1>
 </div>
 <div align="right">
   <h2> <%= @game.player_2.name %>: <%= @game.player_2.hit_points %>HP </h2>
@@ -28,5 +28,18 @@
       <input type="submit" name="attack_type" value="Hypnosis">
       <input type="submit" name="attack_type" value="Thunder Wave">
     </form>
+  </div>
+  <div align="center">
+    <br>
+    <br>
+    <br>TACKLE ~ Damage: 15 ~ Accuracy: 100
+    <br>
+    <br>LUCKY STRIKE / Damage: 5-40 / Accuracy: 100
+    <br>
+    <br>POISON STING / Damage: 5 / Accuracy: 90 (Poisoned 3-5 Turns)
+    <br>
+    <br>HYPNOSIS / Damage: 5 / Accuracy: 70 (Asleep 1-3 Turns)
+    <br>
+    <br>THUNDER WAVE / Damage: 10 / Accuracy: 80 (Paralysed 3-5 Turns)
   </div>
 <% end %>

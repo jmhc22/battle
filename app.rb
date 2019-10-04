@@ -39,8 +39,6 @@ class Battle < Sinatra::Base
   end
 
   post '/para-sleep-check' do
-    attack = params[:attack_type].downcase.split.join('-') if @game.current_turn.is_a? Player
-    erb :status
     if @game.current_turn.status.asleep?
       @status = "asleep"
       erb :status
@@ -48,7 +46,7 @@ class Battle < Sinatra::Base
       @status = "paralysed"
       erb :status
     else
-      redirect "/#{attack}" if @game.current_turn.is_a? Player
+      redirect "/#{params[:attack_type].downcase.split.join('-')}" if @game.current_turn.is_a? Player
       redirect "/#{@game.current_turn.move(@game.defending_player)}"
     end
   end
@@ -66,21 +64,28 @@ class Battle < Sinatra::Base
   end
 
   get '/poison-sting' do
+    redirect '/miss' if rand(1..10) == 10
     Attack.new.poison_sting(@game.defending_player)
     @type = "Poison Sting"
     erb :attack
   end
 
   get '/thunder-wave' do
+    redirect '/miss' if rand(1..10) >= 9
     Attack.new.thunder_wave(@game.defending_player)
     @type = "Thunder Wave"
     erb :attack
   end
 
   get '/hypnosis' do
+    redirect '/miss' if rand(1..10) >= 8
     Attack.new.hypnosis(@game.defending_player)
     @type = "Hypnosis"
     erb :attack
+  end
+
+  get '/miss' do
+    erb :miss
   end
 
   post '/poison-check' do
@@ -93,8 +98,8 @@ class Battle < Sinatra::Base
     if @game.defending_player.hit_points <= 0
       redirect '/lose'
     else
-      @game.current_turn.status.status_recover
       @game.switch_turns
+      @game.current_turn.status.status_recover
       redirect '/play'
     end
   end
