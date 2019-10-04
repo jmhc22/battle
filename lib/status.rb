@@ -29,11 +29,11 @@ class Status
   end
 
   def poisoned
-    @poison = rand(2..4)
+    @poison = rand(3..5)
   end
 
   def paralysed
-    @paralyse = rand(2..4)
+    @paralyse = rand(3..5)
   end
 
 end

@@ -1,4 +1,6 @@
 module BattleMechanics
+
+  DEFAULT_HIT_POINTS = 150
   def receive_damage(amount)
     @hit_points -= amount
     @last_damamge = amount

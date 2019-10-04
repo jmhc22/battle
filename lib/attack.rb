@@ -13,6 +13,16 @@ class Attack
     player.status.poisoned unless player.status.poisoned?
   end
 
+  def thunder_wave(player)
+    player.receive_damage(10)
+    player.status.paralysed unless player.status.paralysed?
+  end
+
+  def hypnosis(player)
+    player.receive_damage(5)
+    player.status.sleeps unless player.status.asleep?
+  end
+
   private
 
   def lucky_caclulator

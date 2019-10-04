@@ -7,7 +7,7 @@ describe Computer do
 
   describe '#move' do
     it 'expect computer to use either tackle or lucky_strike' do
-      allow(computer).to receive(:rand).and_return 1
+      allow(computer).to receive(:early_game).and_return "lucky strike"
       expect(computer.move(player)).to eq "lucky strike"
     end
   end

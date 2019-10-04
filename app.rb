@@ -38,21 +38,28 @@ class Battle < Sinatra::Base
     redirect '/play'
   end
 
-  post '/comp-attack' do
-    if @game.current_turn.move(@game.defending_player) == "tackle"
-      redirect '/attack'
+  post '/para-sleep-check' do
+    attack = params[:attack_type].downcase.split.join('-') if @game.current_turn.is_a? Player
+    erb :status
+    if @game.current_turn.status.asleep?
+      @status = "asleep"
+      erb :status
+    elsif @game.current_turn.status.paralysed? && rand(2) == 1
+      @status = "paralysed"
+      erb :status
     else
-      redirect '/rand-attack'
+      redirect "/#{attack}" if @game.current_turn.is_a? Player
+      redirect "/#{@game.current_turn.move(@game.defending_player)}"
     end
   end
 
-  get '/attack' do
+  get '/tackle' do
     Attack.new.tackle(@game.defending_player)
     @type = "Tackle"
     erb :attack
   end
 
-  get '/rand-attack' do
+  get '/lucky-strike' do
     Attack.new.lucky_strike(@game.defending_player)
     @type = "Lucky Strike"
     erb :attack
@@ -61,6 +68,18 @@ class Battle < Sinatra::Base
   get '/poison-sting' do
     Attack.new.poison_sting(@game.defending_player)
     @type = "Poison Sting"
+    erb :attack
+  end
+
+  get '/thunder-wave' do
+    Attack.new.thunder_wave(@game.defending_player)
+    @type = "Thunder Wave"
+    erb :attack
+  end
+
+  get '/hypnosis' do
+    Attack.new.hypnosis(@game.defending_player)
+    @type = "Hypnosis"
     erb :attack
   end
 

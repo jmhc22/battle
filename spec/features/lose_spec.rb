@@ -4,7 +4,7 @@ feature 'losing the game' do
     context 'See a lose screen' do
       scenario 'at the end of the game' do
         sign_in_and_play
-        13.times {
+        19.times {
           click_button 'Tackle'
           click_button 'OK'
         }

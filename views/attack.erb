@@ -9,6 +9,14 @@
   <h3> <%= @game.defending_player.name %> is poisoned </h3>
 <% end %>
 
+<% if @type == "Thunder Wave" %>
+  <h3> <%= @game.defending_player.name %> is paralysed </h3>
+<% end %>
+
+<% if @type == "Hypnosis" %>
+  <h3> <%= @game.defending_player.name %> is asleep </h3>
+<% end %>
+
 <form action="/poison-check" method="post">
   <input type="submit" value="OK">
 </form>

@@ -6,19 +6,30 @@ class Computer
 
   def initialize(status: Status)
     @name = "Computer"
-    @hit_points = 100
+    @hit_points = DEFAULT_HIT_POINTS
     @status = status.new
   end
 
   def move(player)
-    return "lucky strike" if chance(player) == 1
-    "tackle"
+    return early_game if player.hit_points >= 100
+    return mid_game if player.hit_points >= 50
+    end_game
   end
 
   private
 
-  def chance(player)
-    chance = player.hit_points > 40 ? rand(1..2) : rand(1..3)
+  def early_game
+    ["poison-sting", "poison-sting", "lucky-strike", "lucky-strike", "lucky-strike",
+     "thunder-wave", "thunder-wave", "tackle", "hypnosis" ].sample
+  end
+
+  def mid_game
+    ["hypnosis", "hypnosis", "lucky-strike", "lucky-strike", "tackle",
+     "tackle", "thunder-wave"].sample
+  end
+
+  def end_game
+    ["tackle", "tackle", "tackle", "lucky-strike", "hypnosis"].sample
   end
 
 end

@@ -2,7 +2,6 @@ require_relative 'battle_mechanics'
 
 class Player
   attr_reader :name, :hit_points, :last_damamge, :status
-  DEFAULT_HIT_POINTS = 100
   include BattleMechanics
 
   def initialize(name, status = Status, hit_points = DEFAULT_HIT_POINTS)
