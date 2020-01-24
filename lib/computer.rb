@@ -30,8 +30,7 @@ class Computer
   end
 
   def end_game
-    ["tackle", "tackle", "lucky-strike", "hypnosis", "recover",
+    ["tackle", "tackle", "lucky-strike", "hypnosis", "hypnosis",
      "recover", "poison-sting"].sample
   end
-
 end

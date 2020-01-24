@@ -24,12 +24,12 @@ class Attack
   end
 
   def recover(player)
-    player.receive_damage([-5, -10, -20, -30, -35].sample)
+    player.receive_damage([-5, -10, -20, -20, -30, -35].sample)
   end
 
   private
 
   def lucky_caclulator
-    [5, 5, 10, 10, 10, 15, 20, 20, 30, 40].sample
+    [5, 5, 10, 10, 15, 15, 20, 20, 30, 40].sample
   end
 end
