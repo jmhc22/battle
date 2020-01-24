@@ -11,13 +11,17 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    childprocess (3.0.0)
     diff-lcs (1.3)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     mustermann (1.0.3)
+    nio4r (2.5.2)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     public_suffix (4.0.1)
+    puma (4.3.1)
+      nio4r (~> 2.0)
     rack (2.0.7)
     rack-protection (2.0.7)
       rack
@@ -37,6 +41,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.2)
+    rubyzip (2.0.0)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     sinatra (2.0.7)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -51,7 +59,9 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  puma
   rspec
+  selenium-webdriver
   sinatra
 
 BUNDLED WITH

@@ -2,8 +2,8 @@ require 'player'
 
 describe Player do
 
-    subject(:player_1) { Player.new('player_1') }
-    subject(:player_2) { Player.new('player_2') }
+    subject(:player_1) { Player.new('player_1', 'p1') }
+    subject(:player_2) { Player.new('player_2', 'p2') }
 
   describe "#name" do
     it "returns name" do

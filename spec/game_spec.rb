@@ -2,8 +2,9 @@ require 'game'
 
 describe Game do
 
-  let(:player_1) { double :player }
-  let(:player_2) { double :player }
+  let(:status_obj) { double :status, status_recover: nil }
+  let(:player_1) { double :player, status: status_obj }
+  let(:player_2) { double :player, status: nil }
   subject(:game) { described_class.new(player_1: player_1, player_2: player_2) }
 
   describe "#player_1" do
