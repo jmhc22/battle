@@ -46,8 +46,10 @@ class Battle < Sinatra::Base
 
   post '/api/battle' do
     move = JSON.parse(request.body.read)['attack']
-    outcome = @game.play_turn(move)
-    { "outcome": outcome }.to_json
+    outcome, move_made = @game.play_turn(move)
+    p outcome
+    p move_made
+    { "outcome": outcome, "move": move_made }.to_json
   end
 
   get '/api/gameover' do
@@ -58,6 +60,16 @@ class Battle < Sinatra::Base
   get '/api/poison' do
     outcome = @game.poison_check
     { "outcome": outcome }.to_json
+  end
+
+  get '/api/switch' do
+    player_is_computer = @game.switch_turns
+    { "computer": player_is_computer }.to_json
+  end
+
+  get '/api/compturn' do
+    move = @game.current_turn.move(@game.defending_player)
+    { "move": move }.to_json
   end
 
   get '/lose' do

@@ -11,7 +11,7 @@ class Computer
   end
 
   def move(player)
-    return "recover" if @hit_points <= 40 && rand(2) !=1
+    return "heal" if @hit_points <= 40 && rand(2) !=1
     return early_game if player.hit_points >= 100
     return mid_game if player.hit_points >= 50
     end_game
@@ -20,17 +20,17 @@ class Computer
   private
 
   def early_game
-    ["poison-sting", "poison-sting", "lucky-strike", "lucky-strike",
-     "thunder-wave", "thunder-wave", "tackle", "hypnosis" ].sample
+    ["poison", "poison", "lucky", "lucky",
+     "lightning", "lightning", "normal", "psychic" ].sample
   end
 
   def mid_game
-    ["hypnosis", "hypnosis", "lucky-strike", "lucky-strike", "tackle",
-     "tackle", "thunder-wave", "recover"].sample
+    ["psychic", "psychic", "lucky", "lucky", "normal",
+     "normal", "lightning", "heal"].sample
   end
 
   def end_game
-    ["tackle", "tackle", "lucky-strike", "hypnosis", "hypnosis",
-     "recover", "poison-sting"].sample
+    ["normal", "normal", "lucky", "psychic", "psychic",
+     "heal", "poison"].sample
   end
 end

@@ -25,7 +25,11 @@
     </div>
   </div>
   <div id="gameplay-box">
-    <h2 class="gp-text"><%= @game.current_turn.name %>'s turn, pick a move: <h2>
+    <h2 id="gp-text"><%= @game.current_turn.name %>'s turn, pick a move: <h2>
+      <br>
+    <a id="poischeck" class="ok">OK</a>
+    <a id="nextturn" class="ok">OK</a>
+    <a id="compturn" class="ok">OK</a>
   </div>
   <div id="move-selector" align="center">
     <a class="attack-button" id="normal">NORMAL ATTACK / Damage: 15 / Accuracy: 100</a>

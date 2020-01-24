@@ -18,7 +18,7 @@ class Game
   end
 
   def play_turn(move)
-    return status_check || @attack.use_move(move, current_turn, defending_player)
+    return status_check || [@attack.use_move(move, current_turn, defending_player), move]
   end
 
   def over?
@@ -26,7 +26,7 @@ class Game
   end
 
   def poison_check
-    return @defending_player.poison_damage if current_turn.status.poisoned?
+    return defending_player.poison_damage if defending_player.status.poisoned?
   end
 
   def switch_turns
@@ -45,8 +45,8 @@ class Game
   private
 
   def status_check
-    return "#{current_turn.name} is asleep!" if current_turn.status.asleep?
-    return "#{current_turn.name} is paralysed and can't move!" if current_turn.status.paralysed? && current_turn.status.cannot_move?
+    return ["#{current_turn.name} is asleep!", false] if current_turn.status.asleep?
+    return ["#{current_turn.name} is paralysed and can't move!", false] if current_turn.status.paralysed? && current_turn.status.cannot_move?
     return nil
   end
 end
