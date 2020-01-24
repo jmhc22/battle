@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require './lib/player'
-require './lib/game'
 require './lib/attack'
+require './lib/game'
 require './lib/computer'
 require './lib/status'
 require 'json'
@@ -50,8 +50,8 @@ class Battle < Sinatra::Base
   end
 
   post '/api/battle' do
-    p JSON.parse(request.body.read)
-    {'hello': 'you'}.to_json
+    move = JSON.parse(request.body.read)['attack']
+    @game.play_turn(move)
   end
 
   get '/lose' do

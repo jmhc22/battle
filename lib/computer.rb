@@ -11,7 +11,7 @@ class Computer
   end
 
   def move(player)
-    return "recover" if @hit_points <= 35 && rand(3) !=2
+    return "recover" if @hit_points <= 40 && rand(2) !=1
     return early_game if player.hit_points >= 100
     return mid_game if player.hit_points >= 50
     end_game

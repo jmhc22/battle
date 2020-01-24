@@ -1,35 +1,39 @@
 class Attack
 
-  def tackle(player)
-    player.receive_damage(15)
-  end
+  def use_move(move, attacker, defender)
+    p '-------------------use move reached--------------'
 
-  def lucky_strike(player)
-    player.receive_damage(lucky_caclulator)
-  end
-
-  def poison_sting(player)
-    player.receive_damage(5)
-    player.status.poisoned unless player.status.poisoned?
-  end
-
-  def thunder_wave(player)
-    player.receive_damage(10)
-    player.status.paralysed unless player.status.paralysed?
-  end
-
-  def hypnosis(player)
-    player.receive_damage(5)
-    player.status.sleeps unless player.status.asleep?
-  end
-
-  def recover(player)
-    player.receive_damage([-5, -10, -20, -20, -30, -35].sample)
+    method(move).call(attacker, defender)
   end
 
   private
 
-  def lucky_caclulator
-    [5, 5, 10, 10, 15, 15, 20, 20, 30, 40].sample
+  def normal(attacker, defender)
+    defender.receive_damage(15)
+    p 'normal'
+  end
+
+  def lucky(attacker, defender)
+    defender.receive_damage([5, 5, 10, 10, 15, 15, 20, 20, 30, 40].sample)
+    p 'lucky'
+  end
+
+  def poison(attacker, defender)
+    defender.receive_damage(5)
+    defender.status.poisoned unless defender.status.poisoned?
+  end
+
+  def lightning(attacker, defender)
+    defender.receive_damage(10)
+    defender.status.paralysed unless defender.status.paralysed?
+  end
+
+  def psychic(attacker, defender)
+    defender.receive_damage(5)
+    defender.status.sleeps unless defender.status.asleep?
+  end
+
+  def heal(attacker, _defender)
+    attacker.receive_damage([-5, -10, -20, -20, -30, -35].sample)
   end
 end
