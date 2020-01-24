@@ -82,3 +82,8 @@ span{
 #heal {
   border: solid 2px lime;
 }
+
+#attack-img {
+  width: 100%;
+  padding-bottom: 200px;
+}
