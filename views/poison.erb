@@ -1,9 +1,0 @@
-<style>
-  * { font-family: Courier New; }
-</style>
-<div align="center">
-  <h1> <%= @game.defending_player.name %> is poisoned and loses <%= @game.defending_player.last_damage %> HPs </h1>
-  <form action="/switch-turns">
-    <input type="submit" value="OK">
-  </form>
-</div>

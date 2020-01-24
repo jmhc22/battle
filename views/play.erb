@@ -2,71 +2,41 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body style="min-width:1000px;font-family: Courier New">
-  <div align="center">
+<body>
+  <div id="opponents-title">
     <h1> <%= @game.player_1.name.upcase %> vs. <%= @game.player_2.name.upcase %> </h1>
   </div>
-  <div style="text-align:center;min-width:1000px">
-    <div style="display:inline-block; height:500">
-      <img src="images/unicorn.jpg" style="height:400;width:400">
-      <h2> <%= @game.player_1.name %>: <%= @game.player_1.hit_points %>HP </h2>
-      <% if @game.player_1.status.paralysed? %>
-      <span style="background-color: yellow; color: black"><b> PARALYSED </b></span>
-      <% end %>
-      <% if @game.player_1.status.asleep? %>
-      <span style="background-color: navy; color: white"><b> SLEEPING </b></span>
-      <% end %>
-      <% if @game.player_1.status.poisoned? %>
-      <span style="background-color: purple; color: white"><b> POISONED </b></span>
-      <% end %>
+  <div id="battle-div">
+    <div class="player-image-div">
+      <img src="images/unicorn.jpg" class="player-image">
+      <h2> <%= @game.player_1.name %>: <span id="p1-hp"><%= @game.player_1.hit_points %></span>HP</h2>
+      <span id="p1-paralysed" class="para-status"><b> PARALYSED </b></span>
+      <span id="p1-sleeping" class="sleep-status"><b> SLEEPING </b></span>
+      <span id="p1-poisoned" class="pois-status"><b> POISONED </b></span>
     </div>
-    <div id="attack-space" style="display:inline-block;width:20%">
+    <div id="attack-space">
     </div>
-    <div style="display:inline-block;height:500">
-      <img src="images/dragon.jpg" style="height:400;width:400">
-      <h2> <%= @game.player_2.name %>: <%= @game.player_2.hit_points %>HP </h2>
-      <% if @game.player_2.status.paralysed? %>
-      <span style="background-color: yellow; color: black"><b> PARALYSED </b></span>
-      <% end %>
-      <% if @game.player_2.status.asleep? %>
-      <span style="background-color: navy; color: white"><b> SLEEPING </b></span>
-      <% end %>
-      <% if @game.player_2.status.poisoned? %>
-      <span style="background-color: purple; color: white"><b> POISONED </b></span>
-      <% end %>
+    <div class="player-image-div">
+      <img src="images/dragon.jpg" class="player-image">
+      <h2> <%= @game.player_2.name %>: <span id="p2-hp"><%= @game.player_2.hit_points %></span>HP</h2>
+      <span id="p2-paralysed" class="para-status"><b> PARALYSED </b></span>
+      <span id="p2-sleeping" class="sleep-status"><b> SLEEPING </b></span>
+      <span id="p2-poisoned" class="pois-status"><b> POISONED </b></span>
     </div>
-  <div>
-
-  <h2 align="center"> <%= @game.current_turn.name %>'s turn: </h2>
-  <% if @game.current_turn.is_a? Computer %>
-    <div align="center">
-      <form action="/para-sleep-check" method="post">
-        <input type="submit" value="OK">
-      </form>
-    </div>
-  <% else %>
-    <div align="center">
-      <form action="/para-sleep-check" method="post">
-        <input type="submit" name="attack_type" value="Tackle">
-        <input type="submit" name="attack_type" value="Lucky Strike">
-        <input type="submit" name="attack_type" value="Poison Sting">
-        <input type="submit" name="attack_type" value="Hypnosis">
-        <input type="submit" name="attack_type" value="Thunder Wave">
-        <input type="submit" name="attack_type" value="Recover">
-      </form>
-    </div>
-  <% end %>
-
-  <div align="center">
+  </div>
+  <div id="gameplay-box">
+    <h2><%= @game.current_turn.name %>'s turn, pick a move: <h2>
+  </div>
+  <div id="move-selector" align="center">
     <a class="attack-button" id="normal">NORMAL ATTACK / Damage: 15 / Accuracy: 100</a>
     <br><br><br>
     <a class="attack-button" id="lucky">LUCKY ATTACK / Damage: 5-40 / Accuracy: 100</a>
     <br><br><br>
     <a class="attack-button" id="poison">POISON ATTACK / Damage: 5 / Accuracy: 90 (Poisoned 3-6 Turns)</a>
     <br><br><br>
-    <a class="attack-button" id="psychic">PSYCHIC ATTACK / Damage: 5 / Accuracy: 70 (Asleep 1-3 Turns)</a>
-    <br><br><br>
     <a class="attack-button" id="lightning">LIGHTNING ATTACK / Damage: 10 / Accuracy: 80 (Paralysed 3-5 Turns)</a>
+    <br><br><br>
+    <a class="attack-button" id="psychic">PSYCHIC ATTACK / Damage: 5 / Accuracy: 70 (Asleep 1-3 Turns)</a>
     <br><br><br>
     <a class="attack-button" id="heal">RECOVER / Heals user by 5-35HP (must have lower than 100HP)</a>
   </div>
