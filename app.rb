@@ -22,20 +22,14 @@ class Battle < Sinatra::Base
     erb :single
   end
 
-  post '/name' do
-    player_1 = Player.new(params[:player_1_name], 'p1')
-    player_2 = Computer.new
-    @game = Game.create(player_1, player_2)
-    redirect '/play'
-  end
-
   get '/multi' do
     erb :multi
   end
 
   post '/names' do
-    player_1 = Player.new(params[:player_1_name], 'p1')
-    player_2 = Player.new(params[:player_2_name], 'p2')
+    p1, p2 = params[:p1_name], params[:p2_name]
+    player_1 = Player.new(p1, 'p1')
+    player_2 = p2 ? Player.new(p2, 'p2') : Computer.new
     @game = Game.create(player_1, player_2)
     redirect '/play'
   end
