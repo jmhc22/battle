@@ -1,8 +1,6 @@
 class Attack
 
   def use_move(move, attacker, defender)
-    p '-------------------use move reached--------------'
-
     method(move).call(attacker, defender)
   end
 
@@ -38,6 +36,7 @@ class Attack
   end
 
   def heal(attacker, _defender)
+    return "#{attacker.name}'s HP is already too full!" if attacker.hit_points >= 100
     heal_amount = [-5, -10, -20, -20, -30, -35].sample
     attacker.receive_damage(heal_amount)
     return "#{attacker.name} used Recover. #{attacker.name} recovered #{heal_amount.abs} HP."

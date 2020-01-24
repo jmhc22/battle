@@ -14,15 +14,24 @@ class Game
     @player_2 = player_2
     @players = [player_1, player_2]
     @attack = attack.new
+    @turn_outcome = []
   end
 
   def play_turn(move)
-    p '-------------------reached play turn--------------'
-    outcome = status_check || @attack.use_move(move, current_turn, defending_player)
-    p current_turn
-    p defending_player
-    switch_turns
-    return outcome
+    return status_check || @attack.use_move(move, current_turn, defending_player)
+  end
+
+  def over?
+    defending_player.hit_points <= 0
+  end
+
+  def poison_check
+    return @defending_player.poison_damage if current_turn.status.poisoned?
+  end
+
+  def switch_turns
+    @players.reverse!
+    return current_turn.is_a? Computer
   end
 
   def current_turn
@@ -33,13 +42,11 @@ class Game
     @players.last
   end
 
-  def switch_turns
-    @players.reverse!
-  end
+  private
 
   def status_check
     return "#{current_turn.name} is asleep!" if current_turn.status.asleep?
     return "#{current_turn.name} is paralysed and can't move!" if current_turn.status.paralysed? && current_turn.status.cannot_move?
-    return false
+    return nil
   end
 end

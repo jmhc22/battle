@@ -7,13 +7,8 @@ module BattleMechanics
   end
 
   def poison_damage
-    receive_damage(poison_calculator)
+    damage = [5, 5, 5, 10].sample
+    receive_damage(damage)
+    return "#{@name} is poisoned and took #{damage} HP damage"
   end
-
-  private
-
-  def poison_calculator
-    [5, 5, 5, 10].sample
-  end
-
 end

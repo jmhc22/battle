@@ -44,14 +44,19 @@ class Battle < Sinatra::Base
     erb :play
   end
 
-  get '/api/battle' do
-    p 'api called'
-    {'hello': 'you'}.to_json
-  end
-
   post '/api/battle' do
     move = JSON.parse(request.body.read)['attack']
     outcome = @game.play_turn(move)
+    { "outcome": outcome }.to_json
+  end
+
+  get '/api/gameover' do
+    gameover = @game.over?
+    { "gameover": gameover }.to_json
+  end
+
+  get '/api/poison' do
+    outcome = @game.poison_check
     { "outcome": outcome }.to_json
   end
 
@@ -59,6 +64,5 @@ class Battle < Sinatra::Base
     erb :lose
   end
 
-  # start the server if ruby file executed directly
   run! if app_file == $0
 end
