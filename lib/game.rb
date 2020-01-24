@@ -14,7 +14,6 @@ class Game
     @player_2 = player_2
     @players = [player_1, player_2]
     @attack = attack.new
-    @turn_outcome = []
   end
 
   def play_turn(move)
@@ -30,6 +29,7 @@ class Game
   end
 
   def switch_turns
+    current_turn.status.status_recover
     @players.reverse!
     return current_turn.is_a? Computer
   end

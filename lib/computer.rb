@@ -1,13 +1,14 @@
 require_relative 'battle_mechanics'
 
 class Computer
-  attr_reader :name, :hit_points, :last_damage, :status
+  attr_reader :name, :hit_points, :last_damage, :status, :code
   include BattleMechanics
 
   def initialize(status: Status)
     @name = "Computer"
     @hit_points = DEFAULT_HIT_POINTS
     @status = status.new
+    @code = 'p2'
   end
 
   def move(player)

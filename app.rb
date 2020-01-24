@@ -23,7 +23,7 @@ class Battle < Sinatra::Base
   end
 
   post '/name' do
-    player_1 = Player.new(params[:player_1_name])
+    player_1 = Player.new(params[:player_1_name], 'p1')
     player_2 = Computer.new
     @game = Game.create(player_1, player_2)
     redirect '/play'
@@ -34,8 +34,8 @@ class Battle < Sinatra::Base
   end
 
   post '/names' do
-    player_1 = Player.new(params[:player_1_name])
-    player_2 = Player.new(params[:player_2_name])
+    player_1 = Player.new(params[:player_1_name], 'p1')
+    player_2 = Player.new(params[:player_2_name], 'p2')
     @game = Game.create(player_1, player_2)
     redirect '/play'
   end
@@ -47,8 +47,6 @@ class Battle < Sinatra::Base
   post '/api/battle' do
     move = JSON.parse(request.body.read)['attack']
     outcome, move_made = @game.play_turn(move)
-    p outcome
-    p move_made
     { "outcome": outcome, "move": move_made }.to_json
   end
 
@@ -64,12 +62,17 @@ class Battle < Sinatra::Base
 
   get '/api/switch' do
     player_is_computer = @game.switch_turns
-    { "computer": player_is_computer }.to_json
+    { "computer": player_is_computer, 'cur_name': @game.current_turn.name, 'current': @game.current_turn.code, 'defending': @game.defending_player.code }.to_json
   end
 
   get '/api/compturn' do
     move = @game.current_turn.move(@game.defending_player)
     { "move": move }.to_json
+  end
+
+  get '/api/conditions' do
+    df = @game.defending_player
+    { 'hitpoints': df.hit_points, 'poi': df.status.poisoned?, 'par': df.status.paralysed?, 'sle': df.status.asleep?  }.to_json
   end
 
   get '/lose' do
