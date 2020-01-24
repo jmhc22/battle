@@ -17,7 +17,7 @@ class Game
   end
 
   def play_turn(move)
-    return status_check || [@attack.use_move(move, current_turn, defending_player), move]
+    return status_check || @attack.use_move(move, current_turn, defending_player)
   end
 
   def over?
