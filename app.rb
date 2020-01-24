@@ -41,6 +41,8 @@ class Battle < Sinatra::Base
   end
 
   get '/play' do
+    redirect '/' if @game.started?
+    @game.start_game
     erb :play
   end
 

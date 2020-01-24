@@ -14,6 +14,7 @@ class Game
     @player_2 = player_2
     @players = [player_1, player_2]
     @attack = attack.new
+    @started = false
   end
 
   def play_turn(move)
@@ -40,6 +41,14 @@ class Game
 
   def defending_player
     @players.last
+  end
+
+  def started?
+    @started
+  end
+
+  def start_game
+    @started = true
   end
 
   private

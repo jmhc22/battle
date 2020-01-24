@@ -31,7 +31,7 @@ $(document).ready( () => {
         setTimeout(() => {
           gameOverCheck()
           $('#nextturn').show()
-        }, 800)
+        }, 700)
       } else {
         switchTurns()
       }
@@ -54,7 +54,7 @@ $(document).ready( () => {
       setTimeout(() => {
         gameOverCheck()
         $('#poischeck').show()
-      }, 800)
+      }, 700)
     })
   }
 
@@ -92,8 +92,6 @@ $(document).ready( () => {
   const conditionRefresh = () => {
     $.get('/api/conditions', (res) => {
       stats = JSON.parse(res)
-      console.log(stats)
-      console.log(defendingPlayer)
       $(`#${defendingPlayer}-paralysed`).toggle(stats.par)
       $(`#${defendingPlayer}-sleeping`).toggle(stats.sle)
       $(`#${defendingPlayer}-poisoned`).toggle(stats.poi)
