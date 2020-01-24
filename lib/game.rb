@@ -18,10 +18,11 @@ class Game
 
   def play_turn(move)
     p '-------------------reached play turn--------------'
-    @attack.use_move(move, current_turn, defending_player)
+    outcome = status_check || @attack.use_move(move, current_turn, defending_player)
     p current_turn
     p defending_player
     switch_turns
+    return outcome
   end
 
   def current_turn
@@ -34,5 +35,11 @@ class Game
 
   def switch_turns
     @players.reverse!
+  end
+
+  def status_check
+    return "#{current_turn.name} is asleep!" if current_turn.status.asleep?
+    return "#{current_turn.name} is paralysed and can't move!" if current_turn.status.paralysed? && current_turn.status.cannot_move?
+    return false
   end
 end

@@ -36,4 +36,8 @@ class Status
     @paralyse = [4, 4, 5].sample
   end
 
+  def cannot_move?
+    rand(2) == 1
+  end
+
 end

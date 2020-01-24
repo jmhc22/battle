@@ -2,8 +2,6 @@ $(document).ready( () => {
   console.log('loaded')
 
 
-
-
   $.get('/api/battle', (data) => {
     console.log(data)
   })

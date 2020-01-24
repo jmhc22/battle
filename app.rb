@@ -51,7 +51,8 @@ class Battle < Sinatra::Base
 
   post '/api/battle' do
     move = JSON.parse(request.body.read)['attack']
-    @game.play_turn(move)
+    outcome = @game.play_turn(move)
+    { "outcome": outcome }.to_json
   end
 
   get '/lose' do
