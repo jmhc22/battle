@@ -12,7 +12,7 @@ class Attack
   end
 
   def lucky(attacker, defender, move)
-    damage = [5, 5, 10, 10, 15, 15, 20, 20, 30, 40].sample
+    damage = [15, 15, 5, 5, 10, 10, 20, 20, 30, 40].sample
     defender.receive_damage(damage)
     return ["#{attacker.name} used Lucky Attack. #{defender.name} took #{damage} HP damage.", move]
   end

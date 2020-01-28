@@ -4,8 +4,13 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-gem 'rspec'
+ruby '2.6.3'
+
 gem 'sinatra'
-gem 'capybara'
-gem 'selenium-webdriver'
-gem 'puma'
+
+group :test do
+  gem 'rspec'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'puma'
+end
